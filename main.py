@@ -159,7 +159,7 @@ async def upload(bot: Client, m: Message):
     pw_token = input4.text
     await input4.delete(True)
    
-    await editable.edit("Now send the Thumb url/nEg ➥ https://files.catbox.moe/g7dnnf.jpg \n Or if don't want thumbnail send = no")
+    await editable.edit("Now send the Thumb url/nEg ➥ https://i.postimg.cc/9Q9cdcTs/Picsart-25-06-14-14-24-09-856.jpg \n Or if don't want thumbnail send = no")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
     await input6.delete(True)
@@ -217,8 +217,12 @@ async def upload(bot: Client, m: Message):
 
             try:  
                 
-                cc = f'**[📽️] Vid_ID:** ┈ ⋞ 〈 {str(count).zfill(3)} 〉 ⋟ ┈.** \n\n🦇 𝗟𝗘𝗖 𝗡𝗔𝗠𝗘 ➥{𝗻𝗮𝗺𝗲𝟭} @Ranajii25.mkv \n\n**🦈 ​𝐁𝐀𝐓𝐂𝐇 𝐍𝐀𝐌𝐄 ** ➺ **{raw_text0}**\n\n📥 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗕𝗬 ➺ \n\n༶•┈┈⛧┈♛┈⛧┈┈•༶**\n\n{MR}\n\n**༶•┈┈⛧┈♛┈⛧┈┈•༶\n\n•┈••✦ RANA JII ✦••┈•'
-                cc1 = f'**[📁] Pdf_ID:** ┈ ⋞ 〈 {str(count).zfill(3)} 〉 ⋟ ┈. \n\n🍷 𝗣𝗗𝗙 𝗡𝗔𝗠𝗘 ➥{𝗻𝗮𝗺𝗲𝟭} @Ranajii25.pdf  \n\n**🦈 𝐁𝐀𝐓𝐂𝐇 𝐍𝐀𝐌𝐄 ➺ **{raw_text0}**\n\n📥 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗕𝗬 ➺ \n\n༶•┈┈⛧┈♛┈⛧┈┈•༶**\n\n{MR}\n\n**༶•┈┈⛧┈♛┈⛧┈┈•༶\n\n•┈••✦ RANA JII ✦••┈•'
+                cc = f'╔══════[ 𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ]══════╗\n\n**[📽️] Vid_ID:** ┈ ⋞ 〈 {str(count).zfill(3)} 〉 ⋟ ┈.** \n\n🦇 𝗟𝗘𝗖 𝗡𝗔𝗠𝗘 ➥{𝗻𝗮𝗺𝗲𝟭} @Ranajii25.mkv \n\n**🦈 ​𝐁𝐀𝐓𝐂𝐇 𝐍𝐀𝐌𝐄 ** ➺ **{raw_text0}**\n\n📥 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗕𝗬 ➺ \n\n༶•┈┈⛧┈♛┈⛧┈┈•༶**\n\n{MR}\n\n**༶•┈┈⛧┈♛┈⛧┈┈•༶\n\n╔════════════════════╗
+║           𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ❤️❤️(https://t.me/+c-T9k0YipoRlZGE1)
+╚════════════════════╝'
+                cc1 = f'╔══════[ 𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ]══════╗\n\n**[📁] Pdf_ID:** ┈ ⋞ 〈 {str(count).zfill(3)} 〉 ⋟ ┈. \n\n🍷 𝗣𝗗𝗙 𝗡𝗔𝗠𝗘 ➥{𝗻𝗮𝗺𝗲𝟭} @Ranajii25.pdf  \n\n**🦈 𝐁𝐀𝐓𝐂𝐇 𝐍𝐀𝐌𝐄 ➺ **{raw_text0}**\n\n📥 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗕𝗬 ➺ \n\n༶•┈┈⛧┈♛┈⛧┈┈•༶**\n\n{MR}\n\n**༶•┈┈⛧┈♛┈⛧┈┈•༶\n\n╔════════════════════╗
+║           𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ❤️❤️(https://t.me/+c-T9k0YipoRlZGE1)
+╚════════════════════╝'
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
@@ -261,7 +265,7 @@ async def upload(bot: Client, m: Message):
 
     except Exception as e:
         await m.reply_text(e)
-    await m.reply_text("**🗣 𝗦𝗛𝗔𝗛𝗔𝗕 𝗝𝗜 𝗛𝗢 𝗚𝗬𝗔 🌚**")
+    await m.reply_text("**🥰 𝐁𝐀𝐂𝐇𝐎 𝐋𝐄𝐂𝐓𝐔𝐑𝐄𝐒 𝐔𝐏𝐋𝐎𝐀𝐃𝐄𝐃 ❤️**")
 
 
 bot.run()
