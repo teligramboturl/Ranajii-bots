@@ -73,8 +73,8 @@ async def progress_bar(current, total, reply, start_time):
          f"**┣⪼ 📈 Progress:** {percent:.1f}%\n\n"
          f"**┣⪼ 📦 Loaded:** {format_size(current)} / {format_size(total)}\n\n"
          f"**┣⪼ ⏳ ETA:** {format_time(eta)}\n\n"
-         f"**┣⪼ 🤖 BOT MADE BY ➽ @CHAT_WITH_SAMEER_BOT\n\n"
-         f"**└────═━ ✨ SAMEER JI ✨ ━═────┘**"
+         f"**┣⪼ 🤖 BOT MADE BY ➽ 𝐑𝐀𝐍𝐀 𝐉𝐈𝐈(https://t.me/OFFICIAL_RANA_JII)\n\n"
+         f"**└────═━ ✨ 𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ✨ ━═────┘**"
     )
 
     try:
