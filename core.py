@@ -1,6 +1,3 @@
-# Don't Remove Credit Tg - @BABA_tillu_Gk
-# Subscribe YouTube Channel For Amazing Bot https://www.youtube.com/@Asponlineeducation
-# Ask Doubt on telegram @BABA_tillu_Gk
 
 import os
 import time
