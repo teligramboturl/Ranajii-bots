@@ -64,7 +64,7 @@ async def progress_bar(current, total, reply, start_time):
     bar_length = 15
     done = int(bar_length * current / total)
     percent = (current / total) * 100
-    bar = '█' * done + '▒' * (bar_length - done)
+    bar = '▰' * done + '▱' * (bar_length - done)
 
     text = (
          f"**┌────═━⏫ 𝗨𝗣𝗟𝗢𝗔𝗗𝗜𝗡𝗚...━═────┐**\n\n"
@@ -73,7 +73,7 @@ async def progress_bar(current, total, reply, start_time):
          f"**┣⪼ 📈 Progress:** {percent:.1f}%\n\n"
          f"**┣⪼ 📦 Loaded:** {format_size(current)} / {format_size(total)}\n\n"
          f"**┣⪼ ⏳ ETA:** {format_time(eta)}\n\n"
-         f"**┣⪼ 🤖 BOT MADE BY ➽ 𝐑𝐀𝐍𝐀 𝐉𝐈𝐈(https://t.me/OFFICIAL_RANA_JII)\n\n"
+         f"**┣⪼ 🤖 BOT MADE BY ➽ [𝐑𝐀𝐍𝐀 𝐉𝐈𝐈](https://t.me/OFFICIAL_RANA_JII)\n\n"
          f"**└────═━ ✨ 𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ✨ ━═────┘**"
     )
 
