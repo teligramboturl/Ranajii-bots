@@ -38,7 +38,6 @@ async def start(bot: Client, m: Message):
     start_message = await bot.send_message(
         m.chat.id,
         f"🌟 Welcome {m.from_user.first_name}! 🌟\n\n"
-        photo="https://tinypic.host/images/2025/07/17/IMG_20250713_160846_190.th.jpg",
     )
 
     await asyncio.sleep(1)
