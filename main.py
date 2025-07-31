@@ -9,8 +9,7 @@ import time
 import asyncio
 import requests
 import subprocess
-from logs import logging
-from bs4 import BeautifulSoup
+
 import core as helper
 from utils import progress_bar
 from vars import API_ID, API_HASH, BOT_TOKEN
