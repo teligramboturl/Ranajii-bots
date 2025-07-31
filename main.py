@@ -9,20 +9,34 @@ import time
 import asyncio
 import requests
 import subprocess
-
+import urllib
+import urllib.parse
+import yt_dlp
+import tgcrypto
+import cloudscraper
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+from base64 import b64encode, b64decode
+from logs import logging
+from bs4 import BeautifulSoup
 import core as helper
 from utils import progress_bar
-from vars import API_ID, API_HASH, BOT_TOKEN
+from vars import API_ID, API_HASH, BOT_TOKEN, OWNER, CREDIT, AUTH_USERS, TOTAL_USERS
 from aiohttp import ClientSession
 from pyromod import listen
 from subprocess import getstatusoutput
 
 from pyrogram import Client, filters
-from pyrogram.types import Message
-from pyrogram.errors import FloodWait
+from pyrogram.types import Message, InputMediaPhoto
+from pyrogram.errors import FloodWait, PeerIdInvalid, UserIsBlocked, InputUserDeactivated
 from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid
 from pyrogram.types.messages_and_media import message
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+import aiohttp
+import aiofiles
+import zipfile
+import shutil
+import ffmpeg
 
 bot = Client(
     "bot",
@@ -30,7 +44,89 @@ bot = Client(
     api_hash=API_HASH,
     bot_token=BOT_TOKEN
 )
+processing_request = False
+cancel_requested = False
+cancel_message = None
 
+photologo = 'https://tinypic.host/images/2025/07/17/IMG_20250717_175841_664.jpg' #https://envs.sh/GV0.jpg
+photoyt = 'https://tinypic.host/images/2025/07/17/IMG_20250713_160846_190.jpg' #https://envs.sh/GVi.jpg
+photocp = 'https://tinypic.host/images/2025/07/17/IMG_20250713_160846_190.jpg'
+photozip = 'https://tinypic.host/images/2025/07/17/IMG_20250713_160846_190.jpg'
+
+# Inline keyboard for start command
+BUTTONSCONTACT = InlineKeyboardMarkup([[InlineKeyboardButton(text="📞 Contact", url="https://t.me/RANA_JII_27_BOT")]])
+keyboard = InlineKeyboardMarkup(
+    [
+        [InlineKeyboardButton(text="🛠️ Help", url="https://t.me/Rana_jii_27_bot"), InlineKeyboardButton(text="🛠️ Chanel", url="https://OWNER_0044")],
+    ]
+)
+
+# Image URLs for the random image feature
+image_urls = [
+    "https://tinypic.host/images/2025/07/17/IMG_20250713_160846_190.th.jpg",
+    "https://tinypic.host/images/2025/07/17/IMG_20250713_160846_190.md.png",
+    # Add more image URLs as needed
+]
+
+@bot.on_message(filters.command("addauth") & filters.private)
+async def add_auth_user(client: Client, message: Message):
+    if message.chat.id != OWNER:
+        return 
+    try:
+        new_user_id = int(message.command[1])
+        if new_user_id in AUTH_USERS:
+            await message.reply_text("**User ID is already authorized.**")
+        else:
+            AUTH_USERS.append(new_user_id)
+            await message.reply_text(f"**User ID `{new_user_id}` added to authorized users.**")
+    except (IndexError, ValueError):
+        await message.reply_text("**Please provide a valid user ID.**")
+
+@bot.on_message(filters.command("users") & filters.private)
+async def list_auth_users(client: Client, message: Message):
+    if message.chat.id != OWNER:
+        return
+    
+    user_list = '\n'.join(map(str, AUTH_USERS))  # AUTH_USERS ki list dikhayenge
+    await message.reply_text(f"**Authorized Users:**\n{user_list}")
+
+@bot.on_message(filters.command("rmauth") & filters.private)
+async def remove_auth_user(client: Client, message: Message):
+    if message.chat.id != OWNER:
+        return
+    
+    try:
+        user_id_to_remove = int(message.command[1])
+        if user_id_to_remove not in AUTH_USERS:
+            await message.reply_text("**User ID is not in the authorized users list.**")
+        else:
+            AUTH_USERS.remove(user_id_to_remove)
+            await message.reply_text(f"**User ID `{user_id_to_remove}` removed from authorized users.**")
+    except (IndexError, ValueError):
+        await message.reply_text("**Please provide a valid user ID.**")
+
+
+@bot.on_message(filters.command("broadcast") & filters.private)
+async def broadcast_handler(client: Client, message: Message):
+    if message.chat.id != OWNER:
+        return
+    if not message.reply_to_message:
+        await message.reply_text("**Reply to any message (text, photo, video, or file) with /broadcast to send it to all users.**")
+        return
+    success = 0
+    fail = 0
+    for user_id in list(set(TOTAL_USERS)):
+        try:
+            # Text
+            if message.reply_to_message.text:
+                await client.send_message(user_id, message.reply_to_message.text)
+            # Photo
+            elif message.reply_to_message.photo:
+                await client.send_photo(
+                    user_id,
+                    photo=message.reply_to_message.photo.file_id,
+                    caption=message.reply_to_message.caption or ""
+)
 @bot.on_message(filters.command(["start"]))
 async def start(bot: Client, m: Message):
     user = await bot.get_me()
@@ -38,6 +134,7 @@ async def start(bot: Client, m: Message):
     start_message = await bot.send_message(
         m.chat.id,
         f"🌟 Welcome {m.from_user.first_name}! 🌟\n\n"
+        photo="https://tinypic.host/images/2025/07/17/IMG_20250713_160846_190.th.jpg",
     )
 
     await asyncio.sleep(1)
@@ -192,10 +289,10 @@ async def upload(bot: Client, m: Message):
              #url = f"https://player.muftukmall.site/?id={id}"
             #elif '/master.mpd' in url:
              #id =  url.split("/")[-2]
-             #url = f"https://anonymouspwplayer-b99f57957198.herokuapp.com/pw?url={url}?token={raw_text4}"
+             #url = f"https://anonymouspwplayer-f996115ea61a.herokuapp.com/pw?url={url}?token={raw_text4}"
             #url = f"https://madxapi-d0cbf6ac738c.herokuapp.com/{id}/master.m3u8?token={raw_text4}"
-            elif "d1d34p8vz63oiq" in url or "sec1.pw.live" in url:
-             url = f"https://anonymousrajputplayer-9ab2f2730a02.herokuapp.com/pw?url={url}&token={pw_token}"
+            elif "f996115ea61a" in url or "sec1.pw.live" in url:
+             url = f"https://anonymouspwplayerr-f996115ea61a.herokuapp.com/pw?url={url}&token={pwtoken}"
                 
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
             name = f'{str(count).zfill(3)}) {name1[:60]}'
