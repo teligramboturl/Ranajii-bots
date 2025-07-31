@@ -127,6 +127,7 @@ async def broadcast_handler(client: Client, message: Message):
                     photo=message.reply_to_message.photo.file_id,
                     caption=message.reply_to_message.caption or ""
 )
+                
 @bot.on_message(filters.command(["start"]))
 async def start(bot: Client, m: Message):
     user = await bot.get_me()
