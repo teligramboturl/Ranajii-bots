@@ -177,6 +177,10 @@ async def upload(bot: Client, m: Message):
             if len(links[i]) < 2:
                 continue  # skip bad line
 
+            # 🔹 FIX: name assign pehle hi kar do
+            name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
+            name = f'{str(count).zfill(3)}) {name1[:60]}'
+
             V = links[i][1].replace("file/d/","uc?export=download&id=").replace("www.youtube-nocookie.com/embed", "stream.pwjarvis.app").replace("?modestbranding=1", "").replace("/view?usp=sharing","")
             url = "https://stream.pwjarvis.app" + V
 
@@ -186,10 +190,28 @@ async def upload(bot: Client, m: Message):
                         text = await resp.text()
                         url = re.search(r"(https://stream.pwjarvis.app/*?/main.m3u8.*?)\"", text).group(1)
 
+            elif url.endswith(".m3u8"):
+                try:
+                    cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
+                    os.system(cmd)
+                    copy = await bot.send_video(
+                        chat_id=m.chat.id,
+                        video=f"{name}.mp4",
+                        caption=cc,
+                        thumb=thumb if thumb != "no" else None
+                    )
+                    count += 1
+                    os.remove(f"{name}.mp4")
+                    time.sleep(1)
+                except FloodWait as e:
+                    await m.reply_text(str(e))
+                    time.sleep(e.x)
+                    continue
+                        
             elif 'videos.classplusapp' in url:
                 url = requests.get(
                     f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}',
-                    headers={'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgzNjkyMTIsIm9yZ0lkIjoyNjA1LCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTcwODI3NzQyODkiLCJuYW1lIjoiQWNlIiwiZW1haWwiOm51bGwsImlzRmlyc3RMb2dpbiI6dHJ1ZSwiZGVmYXVsdExhbmd1YWdlIjpudWxsLCJjb3VudHJ5Q29kZSI6IklOIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJpYXQiOjE2NDMyODE4NzcsImV4cCI6MTY0Mzg4NjY3N30.hM33P2ai6ivdzxPPfm01LAd4JWv-vnrSxGXqvCirCSpUfhhofpeqyeHPxtstXwe0'}
+                    headers={'x-access-token': 'token_here'}
                 ).json()['url']
 
             elif "d1d34p8vz63oiq" in url or "sec1.pw.live" in url:
@@ -197,9 +219,6 @@ async def upload(bot: Client, m: Message):
             elif '/master.mpd' in url:
                 id = url.split("/")[-2]
                 url = "https://stream.pwjarvis.com/" + id + "/master.m3u8"
-
-            name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
-            name = f'{str(count).zfill(3)}) {name1[:60]}'
 
             # yt-dlp format filter uses numeric height
             if "youtu" in url:
@@ -240,23 +259,4 @@ async def upload(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                 else:
-                    Show = f"**✈️ 𝐏𝐑𝐎𝐆𝐑𝐄𝐒𝐒 ✈️\n\n┠ 📈 Total Links = {len(links)}\n\n**📩 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐈𝐍𝐆 📩**\n\n**🧚🏻‍♂️ Title** : {name}\n├── **Extention** : {MR}\n\n **Bot Made By** : RANA JII👑"
-                    prog = await m.reply_text(Show)
-                    res_file = await helper.download_video(url, cmd, name)
-                    filename = res_file
-                    await prog.delete(True)
-                    await helper.send_vid(bot, m, cc, filename, thumb, name, prog)
-                    count += 1
-                    time.sleep(1)
-
-            except Exception as e:
-                await m.reply_text(
-                    f"**downloading Interupted **\n{str(e)}\n**Name** » {name}\n**Link** » `{url}`"
-                )
-                continue
-
-    except Exception as e:
-        await m.reply_text(e)
-    await m.reply_text("**🥰 𝐁𝐀𝐂𝐇𝐎 𝐀𝐀𝐉 𝐊𝐀 𝐋𝐄𝐂𝐓𝐔𝐑𝐄𝐒 𝐔𝐏𝐋𝐎𝐀𝐃𝐄𝐃 ❤️**")
-
-bot.run()
+                    Show = f"**✈️ 𝐏𝐑𝐎𝐆𝐑𝐄𝐒𝐒 ✈️\n\n┠ 📈 Total Links = {len(links)}\n\n**📩 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐈𝐍𝐆 📩**\n\n**🧚
