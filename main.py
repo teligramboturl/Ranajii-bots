@@ -30,6 +30,7 @@ bot = Client(
     api_hash=API_HASH,
     bot_token=BOT_TOKEN
 )         
+
 @bot.on_message(filters.command(["start"]))
 async def start(bot: Client, m: Message):
     user = await bot.get_me()
@@ -71,13 +72,10 @@ async def start(bot: Client, m: Message):
     if m.chat.id in AUTH_USERS:
         await start_message.edit_text(f"𝐇𝐞𝐥𝐥𝐨 𝐃𝐞𝐚𝐫  👋! {m.from_user.mention} \n\n ➠ 𝐈 𝐚𝐦 𝐚 𝐓𝐞𝐱𝐭 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐫 𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐖𝐢𝐭𝐡 ♥️ **𝐓𝐗𝐓​** \n\n ​➠ 𝐂𝐚𝐧 𝐄𝐱𝐭𝐫𝐚𝐜𝐭 𝐕𝐢𝐝𝐞𝐨𝐬 & 𝐏𝐝𝐟 𝐅𝐫𝐨𝐦 𝐘𝐨𝐮𝐫 𝐓𝐞𝐱𝐭 𝐅𝐢𝐥𝐞 𝐚𝐧𝐝 𝐔𝐩𝐥𝐨𝐚𝐝 𝐭𝐨 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 \n\n ➠ 𝐔𝐬𝐞 /Ankit1 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐓𝐨 𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐅𝐫𝐨𝐦 𝐓𝐗𝐓 𝐅𝐢𝐥e..\n\n ➠ 𝐔𝐬𝐞 /stop 𝐓𝐨 𝐬𝐭𝐨𝐩 𝐀𝐧𝐲 𝐎𝐧𝐠𝐨𝐢𝐧𝐠 𝐓𝐚𝐬𝐤 \n\n ➠ 𝐌𝐚𝐝𝐞 𝐁𝐲:- @Rana_jii_27_bot </b>")
 
-    
 @bot.on_message(filters.command("stop"))
 async def restart_handler(_, m):
     await m.reply_text("**​🇸​​🇹​​🇴​​🇵​​🇵​​🇪​​🇩​**🚦", True)
     os.execl(sys.executable, sys.executable, *sys.argv)
-
-
 
 @bot.on_message(filters.command(["Ankit1"]))
 async def upload(bot: Client, m: Message):
@@ -89,21 +87,20 @@ async def upload(bot: Client, m: Message):
     path = f"./downloads/{m.chat.id}"
 
     try:
-       with open(x, "r") as f:
-           content = f.read()
-       content = content.split("\n")
-       links = []
-       for i in content:
-           links.append(i.split("://", 1))
-       os.remove(x)
-            # print(len(links)
+        with open(x, "r") as f:
+            content = f.read()
+        content = content.split("\n")
+        links = []
+        for line in content:
+            if "://" in line:
+                links.append(line.split("://", 1))
+        os.remove(x)
     except:
-           await m.reply_text("**Invalid file input.**")
-           os.remove(x)
-           return
+        await m.reply_text("**Invalid file input.**")
+        os.remove(x)
+        return
     
-   
-    await editable.edit(f"**𝕋ᴏᴛᴀʟ ʟɪɴᴋ𝕤 ғᴏᴜɴᴅ ᴀʀᴇ🔗🔗** **{len(links)}**\n\n**𝕊ᴇɴᴅ 𝔽ʀᴏᴍ ᴡʜᴇʀᴇ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ɪɴɪᴛɪᴀʟ ɪ𝕤** **1**")
+    await editable.edit(f"**𝕋ᴏᴛᴀʟ ʟɪɴᴋ𝕘 𝕗ᴏᴜɴᴅ 🔗🔗** **{len(links)}**\n\n**𝕊ᴇɴᴅ 𝔽ʀᴏᴍ ɪɴɪᴛɪᴀʟ** **1**")
     input0: Message = await bot.listen(editable.chat.id)
     raw_text = input0.text
     await input0.delete(True)
@@ -112,31 +109,35 @@ async def upload(bot: Client, m: Message):
     input1: Message = await bot.listen(editable.chat.id)
     raw_text0 = input1.text
     await input1.delete(True)
-    
 
-    await editable.edit("**💀चल अपना 𝗩𝗶𝗱𝗲𝗼 की ʀᴇ𝕤ᴏʟᴜᴛɪᴏɴ📸 चुन बे 🤬**\n\n➺144n\n\n➺240\n\n➺360\n\n➺480\n\n➺720\n\n➺1080 \n\n➺जल्दी चुन बे  🤬")
+    await editable.edit("**💀चल अपना 𝗩𝗶𝗱𝗲𝗼 की ʀᴇ𝕤ᴏʟᴜᴛɪᴏɴ📸 चुन बे 🤬**\n\n➺144\n\n➺240\n\n➺360\n\n➺480\n\n➺720\n\n➺1080 \n\n➺जल्दी चुन बे  🤬")
     input2: Message = await bot.listen(editable.chat.id)
     raw_text2 = input2.text
     await input2.delete(True)
+
+    # ensure integer height
     try:
-        if raw_text2 == "144":
+        height = int(raw_text2)
+    except:
+        height = 360
+
+    try:
+        if height == 144:
             res = "256x144"
-        elif raw_text2 == "240":
+        elif height == 240:
             res = "426x240"
-        elif raw_text2 == "360":
+        elif height == 360:
             res = "640x360"
-        elif raw_text2 == "480":
+        elif height == 480:
             res = "854x480"
-        elif raw_text2 == "720":
+        elif height == 720:
             res = "1280x720"
-        elif raw_text2 == "1080":
+        elif height == 1080:
             res = "1920x1080" 
         else: 
             res = "UN"
     except Exception:
-            res = "UN"
-    
-    
+        res = "UN"
 
     await editable.edit("☠️ अपना नाम डाल बे ☠️ \n\nEg ➥ Rana jii")
     input3: Message = await bot.listen(editable.chat.id)
@@ -153,18 +154,18 @@ async def upload(bot: Client, m: Message):
     pw_token = input4.text
     await input4.delete(True)
    
-    await editable.edit("Now send the Thumb url/nEg ➥ https://i.postimg.cc/9Q9cdcTs/Picsart-25-06-14-14-24-09-856.jpg \n Or if don't want thumbnail send = no")
-    input6 = message = await bot.listen(editable.chat.id)
+    await editable.edit("Now send the Thumb url\nEg ➥ https://i.postimg.cc/9Q9cdcTs/Picsart-25-06-14-14-24-09-856.jpg \nOr if don't want thumbnail send = no")
+    input6 = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
     await input6.delete(True)
     await editable.delete()
 
-    thumb = input6.text
+    thumb = raw_text6
     if thumb.startswith("http://") or thumb.startswith("https://"):
         getstatusoutput(f"wget '{thumb}' -O 'thumb.jpg'")
         thumb = "thumb.jpg"
     else:
-        thumb == "no"
+        thumb = "no"
 
     if len(links) == 1:
         count = 1
@@ -173,8 +174,10 @@ async def upload(bot: Client, m: Message):
 
     try:
         for i in range(count - 1, len(links)):
+            if len(links[i]) < 2:
+                continue  # skip bad line
 
-            V = links[i][1].replace("file/d/","uc?export=download&id=").replace("www.youtube-nocookie.com/embed", "stream.pwjarvis.app").replace("?modestbranding=1", "").replace("/view?usp=sharing","") # .replace("mpd","m3u8")
+            V = links[i][1].replace("file/d/","uc?export=download&id=").replace("www.youtube-nocookie.com/embed", "stream.pwjarvis.app").replace("?modestbranding=1", "").replace("/view?usp=sharing","")
             url = "https://stream.pwjarvis.app" + V
 
             if "visionias" in url:
@@ -184,28 +187,25 @@ async def upload(bot: Client, m: Message):
                         url = re.search(r"(https://stream.pwjarvis.app/*?/main.m3u8.*?)\"", text).group(1)
 
             elif 'videos.classplusapp' in url:
-             url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgzNjkyMTIsIm9yZ0lkIjoyNjA1LCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTcwODI3NzQyODkiLCJuYW1lIjoiQWNlIiwiZW1haWwiOm51bGwsImlzRmlyc3RMb2dpbiI6dHJ1ZSwiZGVmYXVsdExhbmd1YWdlIjpudWxsLCJjb3VudHJ5Q29kZSI6IklOIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJpYXQiOjE2NDMyODE4NzcsImV4cCI6MTY0Mzg4NjY3N30.hM33P2ai6ivdzxPPfm01LAd4JWv-vnrSxGXqvCirCSpUfhhofpeqyeHPxtstXwe0'}).json()['url']
+                url = requests.get(
+                    f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}',
+                    headers={'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgzNjkyMTIsIm9yZ0lkIjoyNjA1LCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTcwODI3NzQyODkiLCJuYW1lIjoiQWNlIiwiZW1haWwiOm51bGwsImlzRmlyc3RMb2dpbiI6dHJ1ZSwiZGVmYXVsdExhbmd1YWdlIjpudWxsLCJjb3VudHJ5Q29kZSI6IklOIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJpYXQiOjE2NDMyODE4NzcsImV4cCI6MTY0Mzg4NjY3N30.hM33P2ai6ivdzxPPfm01LAd4JWv-vnrSxGXqvCirCSpUfhhofpeqyeHPxtstXwe0'}
+                ).json()['url']
 
-            #elif '/master.mpd' in url:
-             #id =  url.split("/")[-2]
-             #url = f"https://player.muftukmall.site/?id={id}"
-            #elif '/master.mpd' in url:
-             #id =  url.split("/")[-2]
-             #url = f"https://anonymouspwplayer-f996115ea61a.herokuapp.com/pw?url={url}?token={raw_text4}"
-            #url = f"https://madxapi-d0cbf6ac738c.herokuapp.com/{id}/master.m3u8?token={raw_text4}"
             elif "d1d34p8vz63oiq" in url or "sec1.pw.live" in url:
-             url = f"https://anonymouspwplayer-0e5a3f512dec.herokuapp.com/pw?url={url}&token={raw_text4}"
+                url = f"https://anonymouspwplayer-0e5a3f512dec.herokuapp.com/pw?url={url}&token={pw_token}"
             elif '/master.mpd' in url:
-             id =  url.split("/")[-2]
-             url =  "https://stream.pwjarvis.com/" + id + "/master.m3u8"
+                id = url.split("/")[-2]
+                url = "https://stream.pwjarvis.com/" + id + "/master.m3u8"
 
             name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
             name = f'{str(count).zfill(3)}) {name1[:60]}'
 
+            # yt-dlp format filter uses numeric height
             if "youtu" in url:
-                ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
+                ytf = f"b[height<={height}][ext=mp4]/bv[height<={height}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
             else:
-                ytf = f"b[height<={raw_text2}]/bv[height<={raw_text2}]+ba/b/bv+ba"
+                ytf = f"b[height<={height}]/bv[height<={height}]+ba/b/bv+ba"
 
             if "jw-prod" in url:
                 cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
@@ -213,9 +213,8 @@ async def upload(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
             try:  
-                
-                cc = f'╔══════[ 𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ]══════╗\n\n**[📽️] Vid_ID:** ┈ ⋞ 〈 {str(count).zfill(3)} 〉 ⋟ ┈.** \n\n🦇 𝗟𝗘𝗖 𝗡𝗔𝗠𝗘 ➥{𝗻𝗮𝗺𝗲𝟭} @Ranajii25.mkv \n\n**🦈 ​𝐁𝐀𝐓𝐂𝐇 𝐍𝐀𝐌𝐄 ** ➺ **{raw_text0}**\n\n📥 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗕𝗬 ➺ \n\n༶•┈┈⛧┈♛┈⛧┈┈•༶**\n\n{MR}\n\n**༶•┈┈⛧┈♛┈⛧┈┈•༶\n\n╔════════════════════╗            [𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ❤️❤️](https://t.me/OFFICIAL_RANA_JII)\n╚════════════════════╝'
-                cc1 = f'╔══════[ 𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ]══════╗\n\n**[📁] Pdf_ID:** ┈ ⋞ 〈 {str(count).zfill(3)} 〉 ⋟ ┈. \n\n🍷 𝗣𝗗𝗙 𝗡𝗔𝗠𝗘 ➥{𝗻𝗮𝗺𝗲𝟭} @Ranajii25.pdf  \n\n**🦈 𝐁𝐀𝐓𝐂𝐇 𝐍𝐀𝐌𝐄 ➺ **{raw_text0}**\n\n📥 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗕𝗬 ➺ \n\n༶•┈┈⛧┈♛┈⛧┈┈•༶**\n\n{MR}\n\n**༶•┈┈⛧┈♛┈⛧┈┈•༶\n\n╔════════════════════╗             [𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ❤️❤️](https://t.me/OFFICIAL_RANA_JII)\n╚════════════════════╝'
+                cc = f'╔══════[ 𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ]══════╗\n\n**[📽️] Vid_ID:** ┈ ⋞ 〈 {str(count).zfill(3)} 〉 ⋟ ┈.** \n\n🦇 𝗟𝗘𝗖 𝗡𝗔𝗠𝗘 ➥{name1} @Ranajii25.mkv \n\n**🦈 ​𝐁𝐀𝐓𝐂𝐇 𝐍𝐀𝐌𝐄 ** ➺ **{raw_text0}**\n\n📥 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗕𝗬 ➺ \n\n༶•┈┈⛧┈♛┈⛧┈┈•༶**\n\n{MR}\n\n**༶•┈┈⛧┈♛┈⛧┈┈•༶\n\n╔════════════════════╗            [𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ❤️❤️](https://t.me/OFFICIAL_RANA_JII)\n╚════════════════════╝'
+                cc1 = f'╔══════[ 𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ]══════╗\n\n**[📁] Pdf_ID:** ┈ ⋞ 〈 {str(count).zfill(3)} 〉 ⋟ ┈. \n\n🍷 𝗣𝗗𝗙 𝗡𝗔𝗠𝗘 ➥{name1} @Ranajii25.pdf  \n\n**🦈 𝐁𝐀𝐓𝐂𝐇 𝐍𝐀𝐌𝐄 ➺ **{raw_text0}**\n\n📥 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗕𝗬 ➺ \n\n༶•┈┈⛧┈♛┈⛧┈┈•༶**\n\n{MR}\n\n**༶•┈┈⛧┈♛┈⛧┈┈•༶\n\n╔════════════════════╗             [𝐑𝐀𝐍𝐀 𝐉𝐈𝐈 ❤️❤️](https://t.me/OFFICIAL_RANA_JII)\n╚════════════════════╝'
                 if "drive" in url:
                     try:
                         ka = await helper.download(url, name)
@@ -259,6 +258,5 @@ async def upload(bot: Client, m: Message):
     except Exception as e:
         await m.reply_text(e)
     await m.reply_text("**🥰 𝐁𝐀𝐂𝐇𝐎 𝐀𝐀𝐉 𝐊𝐀 𝐋𝐄𝐂𝐓𝐔𝐑𝐄𝐒 𝐔𝐏𝐋𝐎𝐀𝐃𝐄𝐃 ❤️**")
-
 
 bot.run()
